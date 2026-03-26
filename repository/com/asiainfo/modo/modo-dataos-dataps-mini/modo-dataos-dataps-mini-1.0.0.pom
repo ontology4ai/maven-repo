@@ -1,130 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.asiainfo.modo</groupId>
-    <artifactId>modo-dataos-dataps-mini</artifactId>
-    <version>1.0.0</version>
-    <packaging>jar</packaging>
-
-    <name>modo-dataos-dataps-mini</name>
-    <description>Maven conversion from Gradle build script</description>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
-
-    <dependencies>
-        <!-- 对应 Gradle: api project(":modo-dataos-dataps") -->
-        <dependency>
-            <groupId>com.asiainfo.modo</groupId>
-            <artifactId>modo-dataos-dataps</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
-
-    <repositories>
-        <repository>
-            <id>central</id>
-            <name>Maven Central Repository</name>
-            <url>https://repo.maven.apache.org/maven2</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <build>
-        <plugins>
-            <!-- 编译插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-
-            <!-- 依赖复制插件：模拟 Gradle copyJar 任务 -->
-            <!-- 将运行时依赖复制到 target/libs/plugin，并排除指定的 Jar -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.1.2</version>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <!-- 对应 Gradle: into "$buildDir/libs/plugin" -->
-                            <outputDirectory>${project.build.directory}/libs/plugin</outputDirectory>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>false</overWriteSnapshots>
-                            <overWriteIfNewer>true</overWriteIfNewer>
-                            
-                            <!-- 
-                                模拟 Gradle excludeJars 逻辑
-                                Maven 无法按文件名通配符排除，使用 excludeGroupIds 替代
-                            -->
-                            <excludeGroupIds>
-                                com.asiainfo.modo,
-                                io.github.suanchou,
-                                org.springframework,
-                                org.springdoc,
-                                io.swagger,
-                                io.swagger.core.v3,
-                                org.flowable,
-                                org.liquibase,
-                                org.codehaus.groovy
-                            </excludeGroupIds>
-                            
-                            <!-- 只复制 jar 文件，排除 *.pom -->
-                            <includeTypes>jar</includeTypes>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- 复制指定 Jar 文件：模拟 Gradle copyDataosJar 任务 -->
-            <!-- 从 target/libs 复制 modo-dataos-dataps-mini-1.0.0.jar 到 target/libs/plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.8</version>
-                <executions>
-                    <execution>
-                        <id>copy-dataos-jar</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <target>
-                                <!-- 对应 Gradle: delete "$buildDir/libs/plugin" -->
-                                <delete dir="${project.build.directory}/libs/plugin"/>
-                                <mkdir dir="${project.build.directory}/libs/plugin"/>
-                                
-                                <!-- 对应 Gradle: from "$buildDir/libs/modo-dataos-dataps-mini-1.0.0.jar" -->
-                                <copy todir="${project.build.directory}/libs/plugin">
-                                    <fileset dir="${project.build.directory}">
-                                        <include name="${project.build.finalName}.jar"/>
-                                    </fileset>
-                                </copy>
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!-- This module was also published with a richer model, Gradle metadata,  -->
+  <!-- which should be used instead. Do not delete the following line which  -->
+  <!-- is to indicate to Gradle or any Gradle module metadata file consumer  -->
+  <!-- that they should prefer consuming it instead. -->
+  <!-- do_not_remove: published-with-gradle-metadata -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.asiainfo.modo</groupId>
+  <artifactId>modo-dataos-dataps-mini</artifactId>
+  <version>1.0.0</version>
+  <name>modo-dataos-dataps</name>
+  <description>dataps</description>
+  <dependencies>
+    <dependency>
+      <groupId>com.asiainfo.modo</groupId>
+      <artifactId>modo-dataos-dataps</artifactId>
+      <version>1.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
 </project>
