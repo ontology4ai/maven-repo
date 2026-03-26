@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.asiainfo.modo</groupId>
+    <artifactId>modo-dataos-dataps</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>modo-dataos-dataps</name>
+    <description>Maven conversion from Gradle build script</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <!-- ==================== Versions (来自 buildscript ext.Versions) ==================== -->
+        <version.spring>5.3.21</version.spring>
+        <version.spring-boot>2.7.0</version.spring-boot>
+        <version.spring-data>2.7.0</version.spring-data>
+        <version.lombok>1.18.24</version.lombok>
+        <version.jackson>2.13.1</version.jackson>
+        <version.hibernate>5.6.9.Final</version.hibernate>
+        <version.suanchou>0.7.0.beta</version.suanchou>
+        <version.magic-api-modo>2.1.1.modo</version.magic-api-modo>
+
+        <!-- ==================== Libs 版本 (来自 buildscript ext.Libs) ==================== -->
+        <version.mysql>5.1.47</version.mysql>
+        <version.oracle>12.1.0.1</version.oracle>
+        <version.postgresql>42.2.5</version.postgresql>
+        <version.commons-lang3>3.9</version.commons-lang3>
+        <version.commons-vfs2>2.9.0</version.commons-vfs2>
+        <version.guava>31.1-jre</version.guava>
+        <version.javax-servlet>3.1.0</version.javax-servlet>
+        <version.commons-codec>1.14</version.commons-codec>
+        <version.commons-beanutils>1.9.4</version.commons-beanutils>
+        <version.httpclient>4.5.13</version.httpclient>
+        <version.httpasyncclient>4.1.4</version.httpasyncclient>
+
+        <!-- ==================== 其他依赖版本 (来自 dependencies 块) ==================== -->
+        <version.modo-dataos-core>1.1.1</version.modo-dataos-core>
+        <version.modo-links-jdbc>1.1.0</version.modo-links-jdbc>
+        <version.modo-links-redis>1.1.0</version.modo-links-redis>
+        <version.modo-app>1.0.14</version.modo-app>
+        <version.modo-front>1.0.5</version.modo-front>
+        <version.hikaricp>4.0.3</version.hikaricp>
+        <version.druid>1.2.12</version.druid>
+        <version.fastjson>1.2.83</version.fastjson>
+        <version.gson>2.9.0</version.gson>
+        <version.okhttp>4.10.0</version.okhttp>
+        <version.jjwt>0.9.1</version.jjwt>
+        <version.skywalking>8.12.0</version.skywalking>
+        <version.feign>11.10</version.feign>
+        <version.feign-form>3.8.0</version.feign-form>
+        <version.httpclient5>5.1</version.httpclient5>
+        <version.hadoop>3.3.1</version.hadoop>
+        <version.jedis>3.8.0</version.jedis>
+        <version.kafka>3.1.1</version.kafka>
+        <version.hbase>2.5.0</version.hbase>
+        <version.odps>0.30.9-public</version.odps>
+        <version.aliyun-oss>3.10.2</version.aliyun-oss>
+        <version.huawei-obs>3.22.3</version.huawei-obs>
+        <version.hutool>5.7.5</version.hutool>
+        <version.minio>8.4.5</version.minio>
+        <version.jsonpath>2.7.0</version.jsonpath>
+        <version.commons-net>3.8.0</version.commons-net>
+        <version.commons-fileupload>1.4</version.commons-fileupload>
+        <version.commons-validator>1.6</version.commons-validator>
+        <version.commons-httpclient>3.1</version.commons-httpclient>
+        <version.jsch>0.1.55</version.jsch>
+        <version.maverick>3.0.0-FINAL</version.maverick>
+        <version.bc>1.60</version.bc>
+        <version.ganymed>262</version.ganymed>
+        <version.tomcat-websocket>9.0.63</version.tomcat-websocket>
+        <version.freemarker>2.3.31</version.freemarker>
+        <version.kerby>2.0.1</version.kerby>
+        <version.junit>5.9.2</version.junit>
+        <version.elasticsearch>7.8.0</version.elasticsearch>
+    </properties>
+
+    <dependencies>
+        <!-- ==================== Core & Project Dependencies ==================== -->
+        <dependency>
+            <groupId>com.asiainfo.dataos</groupId>
+            <artifactId>modo-dataos-core</artifactId>
+            <version>${version.modo-dataos-core}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.asiainfo.modo</groupId>
+            <artifactId>modo-dataos-dataps-requirement</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- ==================== Spring Framework ==================== -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${version.spring}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${version.spring}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${version.spring}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-websocket</artifactId>
+            <version>${version.spring}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-messaging</artifactId>
+            <version>${version.spring}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webflux</artifactId>
+            <version>${version.spring}</version>
+        </dependency>
+
+        <!-- Spring Data -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${version.spring-data}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-envers</artifactId>
+            <version>${version.spring-data}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>${version.spring-data}</version>
+        </dependency>
+
+        <!-- Spring Boot Starter (WebSocket) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+            <version>${version.spring-boot}</version>
+        </dependency>
+
+        <!-- ==================== Servlet ==================== -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${version.javax-servlet}</version>
+        </dependency>
+
+        <!-- ==================== Suanchou ==================== -->
+        <dependency>
+            <groupId>io.github.suanchou</groupId>
+            <artifactId>suanchou-driver</artifactId>
+            <version>${version.suanchou}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.suanchou</groupId>
+            <artifactId>suanchou-weaver</artifactId>
+            <version>${version.suanchou}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.suanchou</groupId>
+            <artifactId>suanchou-common</artifactId>
+            <version>${version.suanchou}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.suanchou</groupId>
+            <artifactId>suanchou-servicediscovery</artifactId>
+            <version>${version.suanchou}</version>
+        </dependency>
+
+        <!-- ==================== Modo Platform ==================== -->
+        <dependency>
+            <groupId>com.asiainfo.modo</groupId>
+            <artifactId>modo-app</artifactId>
+            <version>${version.modo-app}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.asiainfo.modo</groupId>
+            <artifactId>modo-workflow</artifactId>
+            <version>${version.modo-app}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.asiainfo.modo</groupId>
+            <artifactId>modo-platform</artifactId>
+            <version>${version.modo-app}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.asiainfo.modo</groupId>
+            <artifactId>modo-platform-boot</artifactId>
+            <version>${version.modo-app}</version>
+            <classifier>plain</classifier>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.asiainfo.modo</groupId>
+            <artifactId>modo-platform-front</artifactId>
+            <version>${version.modo-front}</version>
+        </dependency>
+
+        <!-- ==================== Links ==================== -->
+        <dependency>
+            <groupId>com.asiainfo.dataos</groupId>
+            <artifactId>modo-links-jdbc</artifactId>
+            <version>${version.modo-links-jdbc}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.asiainfo.dataos</groupId>
+            <artifactId>modo-links-redis</artifactId>
+            <version>${version.modo-links-redis}</version>
+        </dependency>
+
+        <!-- ==================== Database Drivers ==================== -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${version.mysql}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc7</artifactId>
+            <version>${version.oracle}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${version.postgresql}</version>
+        </dependency>
+
+        <!-- ==================== Hibernate ==================== -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${version.hibernate}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-envers</artifactId>
+            <version>${version.hibernate}</version>
+        </dependency>
+
+        <!-- ==================== Connection Pool ==================== -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>${version.hikaricp}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${version.druid}</version>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${version.jedis}</version>
+        </dependency>
+
+        <!-- ==================== Utils & Commons ==================== -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${version.hutool}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${version.commons-lang3}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>${version.commons-beanutils}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${version.gson}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-vfs2</artifactId>
+            <version>${version.commons-vfs2}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>${version.commons-net}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${version.commons-fileupload}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>${version.commons-validator}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${version.guava}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${version.commons-codec}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>${version.jsonpath}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${version.fastjson}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kerby</groupId>
+            <artifactId>kerb-util</artifactId>
+            <version>${version.kerby}</version>
+        </dependency>
+
+        <!-- ==================== Jackson ==================== -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${version.jackson}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>${version.jackson}</version>
+        </dependency>
+
+        <!-- ==================== HTTP Clients ==================== -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${version.httpclient}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpasyncclient</artifactId>
+            <version>${version.httpasyncclient}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
+            <version>${version.httpclient5}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents.core5</groupId>
+            <artifactId>httpcore5-reactive</artifactId>
+            <version>${version.httpclient5}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${version.okhttp}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>${version.commons-httpclient}</version>
+        </dependency>
+
+        <!-- ==================== Storage (OBS / MinIO / OSS) ==================== -->
+        <dependency>
+            <groupId>com.huaweicloud</groupId>
+            <artifactId>esdk-obs-java-bundle</artifactId>
+            <version>${version.huawei-obs}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>${version.minio}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>${version.aliyun-oss}</version>
+        </dependency>
+
+        <!-- ==================== Security & SSH ==================== -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${version.jjwt}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jcraft</groupId>
+            <artifactId>jsch</artifactId>
+            <version>${version.jsch}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sshtools</groupId>
+            <artifactId>maverick-synergy-common</artifactId>
+            <version>${version.maverick}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sshtools</groupId>
+            <artifactId>maverick-synergy-client</artifactId>
+            <version>${version.maverick}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sshtools</groupId>
+            <artifactId>maverick-bc</artifactId>
+            <version>${version.maverick}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sshtools</groupId>
+            <artifactId>maverick-base</artifactId>
+            <version>${version.maverick}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>${version.bc}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk15on</artifactId>
+            <version>${version.bc}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.ethz.ganymed</groupId>
+            <artifactId>ganymed-ssh2</artifactId>
+            <version>${version.ganymed}</version>
+        </dependency>
+
+        <!-- ==================== Monitoring ==================== -->
+        <dependency>
+            <groupId>org.apache.skywalking</groupId>
+            <artifactId>apm-toolkit-logback-1.x</artifactId>
+            <version>${version.skywalking}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.skywalking</groupId>
+            <artifactId>apm-toolkit-trace</artifactId>
+            <version>${version.skywalking}</version>
+        </dependency>
+
+        <!-- ==================== Web Container & Template ==================== -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-websocket</artifactId>
+            <version>${version.tomcat-websocket}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>${version.freemarker}</version>
+        </dependency>
+
+        <!-- ==================== Feign ==================== -->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-core</artifactId>
+            <version>${version.feign}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-jackson</artifactId>
+            <version>${version.feign}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-slf4j</artifactId>
+            <version>${version.feign}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign.form</groupId>
+            <artifactId>feign-form</artifactId>
+            <version>${version.feign-form}</version>
+        </dependency>
+
+        <!-- ==================== Big Data ==================== -->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>${version.hadoop}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>${version.kafka}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-client</artifactId>
+            <version>${version.hbase}</version>
+        </dependency>
+
+        <!-- ==================== ElasticSearch ==================== -->
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>${version.elasticsearch}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch-cli</artifactId>
+            <version>${version.elasticsearch}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-client</artifactId>
+            <version>${version.elasticsearch}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-high-level-client</artifactId>
+            <version>${version.elasticsearch}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch-core</artifactId>
+            <version>${version.elasticsearch}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch-geo</artifactId>
+            <version>${version.elasticsearch}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch-secure-sm</artifactId>
+            <version>${version.elasticsearch}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch-x-content</artifactId>
+            <version>${version.elasticsearch}</version>
+        </dependency>
+
+        <!-- ==================== ODPS ==================== -->
+        <dependency>
+            <groupId>com.aliyun.odps</groupId>
+            <artifactId>odps-sdk-commons</artifactId>
+            <version>${version.odps}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun.odps</groupId>
+            <artifactId>odps-sdk-core</artifactId>
+            <version>${version.odps}</version>
+        </dependency>
+
+        <!-- ==================== Lombok ==================== -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${version.lombok}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- ==================== Test ==================== -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${version.junit}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${version.junit}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <!-- 私有仓库配置 (asiainfo, suanchou 等可能需要) -->
+        <!--
+        <repository>
+            <id>asiainfo-repo</id>
+            <name>AsiaInfo Repository</name>
+            <url>https://your-private-repo.com/maven</url>
+        </repository>
+        -->
+    </repositories>
+
+    <build>
+        <plugins>
+            <!-- 编译插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${version.lombok}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+
+            <!-- 依赖复制插件 (模拟 Gradle copyJar) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/libs/plugin</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                            <excludeGroupIds>
+                                com.asiainfo.modo,
+                                io.github.suanchou,
+                                org.springframework,
+                                org.springdoc,
+                                io.swagger,
+                                io.swagger.core.v3,
+                                org.flowable,
+                                org.liquibase,
+                                org.codehaus.groovy
+                            </excludeGroupIds>
+                            <includeTypes>jar</includeTypes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 复制主构建产物 (模拟 Gradle copyDataosJar) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>copy-main-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <copy todir="${project.build.directory}/libs/plugin">
+                                    <fileset dir="${project.build.directory}">
+                                        <include name="${project.build.finalName}.jar"/>
+                                    </fileset>
+                                </copy>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
